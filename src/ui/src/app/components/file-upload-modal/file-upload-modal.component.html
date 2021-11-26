@@ -1,0 +1,27 @@
+<div class="container" [ngClass]="{'closed' : !isFileModalOpen}">
+    <div class="overlay" (click)="setModalOpen()"></div>
+    <form [formGroup]="fileForm">
+        <div>
+            <h2>Upload File Query</h2>
+        </div>
+        <div class="group">
+            <input class="input" type="text" name="fileName" formControlName="queryName"
+                placeholder="(eg) Optimus file" />
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Query Name</label>
+        </div>
+        <div class="group">
+            <input class="input fileInput" (change)="onFileChange($event)" name="file" type="file"
+                formControlName="file" />
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>File Upload</label>
+        </div>
+
+        <div class="button-container">
+            <button class="cancel" (click)="setModalOpen()">Cancel</button>
+            <button class="submit" type="submit" (click)="onSubmit()">Submit</button>
+        </div>
+    </form>
+</div>

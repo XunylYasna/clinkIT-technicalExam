@@ -1,0 +1,204 @@
+aside {
+    background-color: var(--bg-black);
+    height: 100vh !important;
+    width: 300px;
+    z-index: 5;
+    position: fixed;
+    padding-top: 0px;
+
+    .aside-content {
+        // height: calc(100vh - 200px) !important;
+        width: 300px;
+        background-color: var(--bg-black);
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin: 0;
+        padding: 1rem 3rem;
+        text-transform: uppercase;
+        font-family: var(--ff-primary);
+        color: var(--light-gray);
+    }
+
+    ul {
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+        max-height: 25vh;
+        overflow-y: auto;
+        li {
+            a {
+                color: var(--light-gray);
+                display: block;
+                text-decoration: none;
+                padding: 1rem 3rem;
+
+                &.active {
+                    background-color: var(--dark-red);
+                    color: white;
+                }
+
+                &:hover {
+                    background-color: var(--dark-red);
+                }
+            }
+        }
+    }
+
+    hr {
+        width: 80%;
+        border: 0.1px solid #878787;
+    }
+
+    .fileQuery {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        a {
+            text-align: center;
+            line-height: 2.5rem;
+            margin-right: 20px;
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--light-gray);
+            font-size: 2rem;
+            padding: 0;
+            border: 2px solid var(--light-gray);
+            border-radius: 100%;
+            transition: all ease-in-out 0.3s;
+        }
+        a:hover {
+            cursor: pointer;
+            color: white;
+            border: 2px solid white;
+        }
+    }
+}
+
+aside.closed {
+    display: none;
+}
+
+/* form starting stylings ------------------------------- */
+$inputWidth: 280px;
+$accentColor: var(--dark-red);
+.group {
+    position: relative;
+    margin: 45px auto 10px auto;
+}
+input {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: $inputWidth;
+    margin: auto;
+    border: none;
+    border-bottom: 1px solid var(--light-gray);
+    background-color: transparent;
+    color: var(--light-gray);
+}
+input:focus {
+    outline: none;
+}
+
+/* LABEL ======================================= */
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label,
+input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: $accentColor;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    margin: auto;
+    width: $inputWidth;
+}
+.bar:before,
+.bar:after {
+    content: "";
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: $accentColor;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+.bar:before {
+    left: 50%;
+}
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+    width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+@-moz-keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+@keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}

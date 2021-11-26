@@ -1,0 +1,20 @@
+<nav>
+    <div class="logo-div">
+        <a (click)="toggleAsideFunction()" class="sidebar-toggle-btn trigger-toggle-sidebar">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line line-angle1" [ngClass]="{'open': isAsideOpen}"></span>
+            <span class="line line-angle2" [ngClass]="{'open': isAsideOpen}"></span>
+        </a>
+        <h1 class="logo">Fleet</h1>
+    </div>
+    <div class="links">
+        <ul>
+            <li>
+                <a class="link underline" href="/home">Map</a>
+                <!-- <a class="link underline" href="/table">Table</a> -->
+            </li>
+        </ul>
+    </div>
+</nav>

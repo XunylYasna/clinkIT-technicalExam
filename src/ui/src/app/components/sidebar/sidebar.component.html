@@ -1,0 +1,41 @@
+<aside [ngClass]="{'closed' : !isAsideOpen}">
+    <div class="aside-content">
+        <!-- <input > -->
+        <div class="group">
+            <input type="search" placeholder="🔎 Ctrl+F to search vehicles" (keyup)="setSearchFilter($event)"
+                name="searchFilter" #searchFilterField />
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Search</label>
+        </div>
+        <h2>Fleets</h2>
+        <ul>
+            <li>
+                <a [routerLink]="['/home']" [ngClass]="{'active': activeFleet == undefined}"
+                    [queryParams]="{'fleet': null}">All</a>
+            </li>
+            <li *ngFor="let fleet of fleets">
+                <a [routerLink]="['/home']" routerLinkActive="active"
+                    [queryParams]="{'fleet': fleet.id}">{{fleet.name}}</a>
+            </li>
+        </ul>
+        <hr class="hr" />
+        <div class="fileQuery">
+            <h2>File Queries </h2>
+            <a class="add" (click)="setModalOpen()">+</a>
+        </div>
+
+        <ul>
+            <li>
+                <a [routerLink]="['/home']" [ngClass]="{'active': activeFile == undefined}"
+                    [queryParams]="{'file': null}">None</a>
+            </li>
+            <li *ngFor="let file of files">
+                <a [routerLink]="['/home']" routerLinkActive="active"
+                    [queryParams]="{'file': file.id}">{{file.fileName}}</a>
+            </li>
+        </ul>
+
+        <spinner class="overlay" *ngIf="fleetsLoading"></spinner>
+    </div>
+</aside>

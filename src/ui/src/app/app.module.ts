@@ -10,15 +10,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UiModule } from './ui.module';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ApiModule.forRoot({rootUrl: environment.apiUrl}),
+    ApiModule.forRoot({ rootUrl: environment.apiUrl }),
     AppRoutingModule,
     UiModule
   ],

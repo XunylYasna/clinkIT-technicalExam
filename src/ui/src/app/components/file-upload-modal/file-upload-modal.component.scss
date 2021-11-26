@@ -1,0 +1,202 @@
+.container {
+    position: fixed;
+    top: 0;
+
+    height: 100vh;
+    width: 100vw;
+    z-index: 99;
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.65);
+        // background-color: black;
+        z-index: 99;
+    }
+
+    form {
+        z-index: 100;
+        position: fixed;
+        top: 30%;
+        left: calc(100vw - 50vw - 150px);
+        width: 300px;
+        height: 400px;
+        background-color: var(--bg-black);
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 5rem;
+
+        h2 {
+            font-family: var(--ff-primary);
+            color: var(--light-gray);
+            font-size: 2rem;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 5rem;
+
+        button {
+            width: 45%;
+            line-height: 36px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            background-color: transparent;
+            border: 1px solid var(--light-gray);
+            border-radius: 3px;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 10px;
+            position: relative;
+            transition: all ease-in-out 0.3s;
+        }
+
+        .cancel {
+            &:hover {
+                background-color: var(--dark-red);
+                color: white;
+            }
+        }
+        .submit {
+            &:hover {
+                background-color: var(--dark-blue);
+                color: white;
+            }
+        }
+    }
+}
+
+.container.closed {
+    display: none;
+}
+
+/* form starting stylings ------------------------------- */
+$inputWidth: 280px;
+$accentColor: var(--dark-red);
+.group {
+    position: relative;
+    margin: 45px auto 10px auto;
+}
+.input {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: $inputWidth;
+    margin: auto;
+    border: none;
+    border-bottom: 1px solid var(--light-gray);
+    background-color: transparent;
+    color: var(--light-gray);
+}
+.input:focus {
+    outline: none;
+}
+
+/* LABEL ======================================= */
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+.input:focus ~ label,
+.input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: $accentColor;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    margin: auto;
+    width: $inputWidth;
+}
+.bar:before,
+.bar:after {
+    content: "";
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: $accentColor;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+.bar:before {
+    left: 50%;
+}
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+.input:focus ~ .bar:before,
+.input:focus ~ .bar:after {
+    width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+.input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+@-moz-keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+@keyframes inputHighlighter {
+    from {
+        background: $accentColor;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}

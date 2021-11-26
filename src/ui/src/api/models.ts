@@ -5,3 +5,7 @@ export { GetVehiclesResponse } from './models/get-vehicles-response';
 export { Location } from './models/location';
 export { VehicleType } from './models/vehicle-type';
 export { VehicleViewModel } from './models/vehicle-view-model';
+export { GetFilesRequest } from './models/get-files-request';
+export { GetFilesResponse } from './models/get-files-response';
+export { PostFileRequest } from './models/post-files-request';
+export { PostFileResponse } from './models/post-files-response';
