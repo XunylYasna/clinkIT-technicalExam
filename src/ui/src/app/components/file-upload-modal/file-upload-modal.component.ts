@@ -1,6 +1,8 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { delay } from 'rxjs';
+import { PostFileRequest } from 'src/api/models';
 import { FileService } from 'src/api/services';
 
 @Component({
@@ -46,14 +48,12 @@ export class FileUploadModalComponent implements OnInit {
       this.fileString = myReader.result as string;
       this.queryName = this.fileForm.value.queryName
       // Post to Server
-      this.fileService.apiFilesPost({
-        request: {
-          file: {
-            query: this.queryName,
-            stringContent: this.fileString
-          }
-        }
-      }).pipe(delay(1000))
+      let postRequest: PostFileRequest = {
+        Name: this.queryName,
+        Contents: this.fileString
+      };
+      this.fileService.apiFilesPost({ request: postRequest }
+      ).pipe(delay(1000))
         .subscribe({
           next: (response) => {
             console.log(response)

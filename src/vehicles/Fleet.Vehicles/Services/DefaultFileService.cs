@@ -45,7 +45,10 @@ namespace Fleet.Vehicles.Services
 
         public async Task<PostFileResponse> PostFileAsync(PostFileRequest request)
         {
-            var file = new File();
+            var file = new File({
+                Name: request.Name,
+                Content: request.Content,
+            });
             await _fileRepository.UploadFile(file);
             var response = new PostFileResponse
             {

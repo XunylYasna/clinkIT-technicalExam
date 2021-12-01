@@ -1,8 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs';
-import { GetFleetsRequest } from 'src/api/models';
-import { GetFilesRequest } from 'src/api/models';
+import { GetFilesResponse, GetFleetsRequest } from 'src/api/models';
 import { FleetsService } from 'src/api/services';
 import { FileService } from 'src/api/services';
 
@@ -35,11 +34,11 @@ export class SidebarComponent implements OnInit {
   // Files
   files: any = [];
   activeFile: string | undefined = undefined;
-  fileLoading: boolean = false;
+  filesLoading: boolean = false;
 
   constructor(
     private fleetsService: FleetsService,
-    private fileService: FileService,
+    private filesService: FileService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -78,9 +77,22 @@ export class SidebarComponent implements OnInit {
         }
       });
     // Getting List of Files
-    let requestFile: GetFilesRequest = {};
-    this.fleetsLoading = true;
-    this.files = this.fileService.apiFilesGet({ request: requestFile })
+    let requestFiles: GetFilesResponse = {};
+    this.filesLoading = true;
+    this.filesService.apiFilesGet$Json({ request: requestFiles })
+      .pipe(delay(1000))
+      .subscribe({
+        next: (response) => {
+          if (response.files == null) return;
+          this.files = response.files;
+        },
+        error: (response) => {
+          this.filesLoading = false;
+        },
+        complete: () => {
+          this.filesLoading = false;
+        }
+      });
 
   }
 

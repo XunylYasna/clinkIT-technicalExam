@@ -6,6 +6,7 @@ namespace Fleet.Vehicles.Requests
 {
     public class PostFileRequest
     {
-        public FileViewModel Post { get; set; }
+        public string Name { get; set; }
+        public string Contents { get; set; }
     }
 }

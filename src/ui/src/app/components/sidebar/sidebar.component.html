@@ -32,7 +32,7 @@
             </li>
             <li *ngFor="let file of files">
                 <a [routerLink]="['/home']" routerLinkActive="active"
-                    [queryParams]="{'file': file.id}">{{file.fileName}}</a>
+                    [queryParams]="{'file': file.id}">{{file.name}}</a>
             </li>
         </ul>
 

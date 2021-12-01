@@ -26,7 +26,7 @@ namespace Fleet.Api.Controllers
         public Task<GetFilesResponse> GetFilesAsync([FromQuery] GetFilesRequest request) => _fileService.GetFilesAsync(request);
 
         /// <summary>
-        /// Update vehicle location logs
+        /// Posts a new File
         /// </summary>
         /// <param name="request">The File Contents</param>
         /// <returns>An empty response</returns>
