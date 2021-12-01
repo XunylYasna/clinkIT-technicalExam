@@ -4,8 +4,8 @@ namespace Fleet.Vehicles.Models
 {
     public class File
     {
-        public int Id { get; set; }
-        public string FileName { get; set; }
-        public string JSONString {get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Content {get; set; }
     }
 }

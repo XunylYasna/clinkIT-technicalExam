@@ -17,6 +17,23 @@ namespace Fleet.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
+            modelBuilder.Entity("Fleet.Vehicles.Models.File", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("Text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+                    
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id"); 
+
+                    b.ToTable("Files");
+                });
+
             modelBuilder.Entity("Fleet.Vehicles.Models.Fleet", b =>
                 {
                     b.Property<int>("Id")

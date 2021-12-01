@@ -9,6 +9,7 @@ namespace Fleet.Vehicles
         public DbSet<VehicleFleet> VehicleFleets { get; set; }
         public DbSet<Models.Fleet> Fleets { get; set; }
         public DbSet<VehicleLogItem> VehicleLogItems { get; set; }
+        public DbSet<Models.File> Files { get; set; }
 
         public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options) { }
 
@@ -26,6 +27,13 @@ namespace Fleet.Vehicles
                     Name = "Truck#1",
                     Type = VehicleType.Truck
                 });
+            });
+
+            builder.Entity<Models.File>(file =>{
+                file.Property(v => v.Id).ValueGeneratedOnAdd();
+                file.Property(v => v.Name).IsRequired(true);
+                file.Property(v => v.Content);
+
             });
 
             builder.Entity<Models.Fleet>(fleet =>

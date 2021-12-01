@@ -26,9 +26,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IVehicleRepository, EfCoreVehicleRepository>();
             services.AddScoped<IVehicleLogItemRepository, EfCoreVehicleLogItemRepository>();
             services.AddScoped<IFleetRepository, EfCoreFleetRepository>();
+            services.AddScoped<IFileRepository, EfCoreFileRepository>();
+
 
             services.AddScoped<IVehicleService, DefaultVehicleService>();
             services.AddScoped<IFleetService, DefaultFleetService>();
+            services.AddScoped<IFileService, DefaultFileService>();
 
             return services;
         }
