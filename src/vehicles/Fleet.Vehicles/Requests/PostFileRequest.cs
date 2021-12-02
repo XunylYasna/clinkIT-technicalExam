@@ -7,6 +7,6 @@ namespace Fleet.Vehicles.Requests
     public class PostFileRequest
     {
         public string Name { get; set; }
-        public string Contents { get; set; }
+        public string Content { get; set; }
     }
 }

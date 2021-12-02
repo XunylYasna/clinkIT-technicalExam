@@ -127,10 +127,15 @@ export class FileService extends BaseService {
         request: PostFileRequest
     }): Observable<StrictHttpResponse<PostFileResponse>> {
 
-        const rb = new RequestBuilder(this.rootUrl, FileService.ApiFilesGetPath + '/submit', 'post')
-        if (params?.request?.Name && params?.request?.Contents) {
-            rb.body(params.request, 'application/json');
-        }
+        // const rb = new RequestBuilder(this.rootUrl, FileService.ApiFilesGetPath + '/submit', 'post')
+        // if (params?.request?.Name && params?.request?.Contents) {
+        //     rb.body({
+        //         Name: params.request.Name,
+        //         Content: params.request.Contents
+        //     }, 'application/json');
+        //     console.log(params.request)
+        // }
+
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -138,8 +143,15 @@ export class FileService extends BaseService {
             })
         };
 
+
+
+        // curl -k -X POST -H "Content-type:application/json" --data "{\"Name\": \"testCurl\", \"Content\": \"content\"}" https://localhost:5001/api/files/submit
+
         const apiUrl = this.rootUrl + FileService.ApiFilesGetPath + '/submit'
-        return this.http.post(apiUrl, params.request, httpOptions).pipe(
+        return this.http.post(apiUrl, {
+            Name: params.request.Name,
+            Content: params.request.Contents
+        }, httpOptions).pipe(
             filter((r: any) => r instanceof HttpResponse),
             map((r: HttpResponse<any>) => {
                 return r as StrictHttpResponse<PostFileResponse>;

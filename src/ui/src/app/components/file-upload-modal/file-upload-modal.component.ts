@@ -28,7 +28,7 @@ export class FileUploadModalComponent implements OnInit {
     file: '',
   })
 
-  fileString = '';
+  fileString = ''
   queryName = ''
 
   onFileChange(event: any) {
@@ -62,6 +62,9 @@ export class FileUploadModalComponent implements OnInit {
             console.log(response)
           },
           complete: () => {
+
+            this.fileForm.reset()
+            this.setModalOpen()
           }
         });
     };
