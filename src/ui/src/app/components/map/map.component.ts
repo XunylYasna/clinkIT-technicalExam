@@ -44,14 +44,20 @@ export class MapComponent implements OnInit {
   layers: L.Layer[] = [];
   vehiclesLoading: boolean = false;
 
+
+  activeFile: string | undefined = undefined;
+
   constructor(private vehiclesService: VehiclesService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       let fleetId = params['fleet'];
+      let fileid = params['file'];
       if (fleetId == undefined) this.activeFleet = undefined;
       else this.activeFleet = parseInt(fleetId);
+      if (fileid == undefined) this.activeFile = undefined;
+      else this.activeFile = fileid;
       this.loadVehicles();
     });
   }
@@ -61,7 +67,7 @@ export class MapComponent implements OnInit {
     timer(0, 3000)
       .pipe(
         delay(1000),
-        switchMap(() => this.vehiclesService.apiVehiclesGet$Json({ FleetId: this.activeFleet })),
+        switchMap(() => this.vehiclesService.apiVehiclesGet$Json({ FleetId: this.activeFleet, FileId: this.activeFile })),
         tap(response => {
           this.layers = this.layers.filter(l => false);
           this.vehiclesLoading = false;

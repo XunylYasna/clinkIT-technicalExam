@@ -88,13 +88,19 @@ export class VehiclesService extends BaseService {
    */
   apiVehiclesGet$Json$Response(params?: {
     FleetId?: number;
+    FileId?: string;
   }): Observable<StrictHttpResponse<GetVehiclesResponse>> {
 
     const rb = new RequestBuilder(this.rootUrl, VehiclesService.ApiVehiclesGetPath, 'get');
-    if (params) {
+    if (params?.FleetId) {
       rb.query('FleetId', params.FleetId, {});
     }
 
+    if (params?.FileId) {
+      rb.query('FileId', params.FileId, {});
+    }
+
+    console.log(rb)
     return this.http.request(rb.build({
       responseType: 'json',
       accept: 'text/json'
@@ -118,6 +124,7 @@ export class VehiclesService extends BaseService {
    */
   apiVehiclesGet$Json(params?: {
     FleetId?: number;
+    FileId?: string;
   }): Observable<GetVehiclesResponse> {
 
     return this.apiVehiclesGet$Json$Response(params).pipe(

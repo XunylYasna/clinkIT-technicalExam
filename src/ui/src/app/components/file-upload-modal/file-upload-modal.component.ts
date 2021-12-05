@@ -62,9 +62,9 @@ export class FileUploadModalComponent implements OnInit {
             console.log(response)
           },
           complete: () => {
-
             this.fileForm.reset()
             this.setModalOpen()
+            location.reload();
           }
         });
     };

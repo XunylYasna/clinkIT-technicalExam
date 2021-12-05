@@ -14,12 +14,15 @@ namespace Fleet.Vehicles.Services
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IVehicleLogItemRepository _vehicleLogItemRepository;
+        private readonly IFileRepository _fileRepository;
 
         public DefaultVehicleService(IVehicleRepository vehicleRepository,
-            IVehicleLogItemRepository vehicleLogItemRepository)
+            IVehicleLogItemRepository vehicleLogItemRepository,
+            IFileRepository fileRepository)
         {
             _vehicleRepository = vehicleRepository;
             _vehicleLogItemRepository = vehicleLogItemRepository;
+            _fileRepository = fileRepository;
         }
 
         public async Task<GetVehiclesResponse> GetVehiclesAsync(GetVehiclesRequest request)
@@ -28,6 +31,12 @@ namespace Fleet.Vehicles.Services
             {
                 // Get by fleet
                 return await GetVehiclesByFleetId(request.FleetId);
+            }
+
+            else if(!string.IsNullOrEmpty(request.FileId))
+            {
+                // Get by file
+                return await GetVehiclesByFileId(request.FileId);
             }
 
             var vehicles = await _vehicleRepository.GetAsync();
@@ -104,6 +113,28 @@ namespace Fleet.Vehicles.Services
         private async Task<GetVehiclesResponse> GetVehiclesByFleetId(int? fleetId)
         {
             var vehicles = await _vehicleRepository.GetAsync(v => v.VehicleFleets.Any(vf => vf.FleetId == fleetId));
+            var viewModels = vehicles.Select(v => new VehicleViewModel
+            {
+                Id = v.Id,
+                Name = v.Name,
+                Type = v.Type,
+                LastKnownLocation = v.Log?.LastOrDefault()?.Location
+            });
+
+            var response = new GetVehiclesResponse
+            {
+                Vehicles = viewModels
+            };
+
+            return response;
+        }
+
+        private async Task<GetVehiclesResponse> GetVehiclesByFileId(string? fileId)
+        {
+            File file = await _fileRepository.GetAsync(fileId);
+            string[] fileContent = file.Content.Split(',');
+            
+            var vehicles = await _vehicleRepository.GetAsync(v => fileContent.Contains(v.Id.ToString())); //vf => fileContent.Contains(vf.VehicleId.ToString())
             var viewModels = vehicles.Select(v => new VehicleViewModel
             {
                 Id = v.Id,

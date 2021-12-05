@@ -17,7 +17,7 @@ namespace Fleet.Api.Controllers
         }
 
         /// <summary>
-        /// Get a list of vehicles optionally filtered by fleet ID
+        /// Get a list of vehicles optionally filtered by fleet ID or File Id
         /// </summary>
         /// <param name="request">The optional fleet ID</param>
         /// <returns>A list of vehicles</returns>
